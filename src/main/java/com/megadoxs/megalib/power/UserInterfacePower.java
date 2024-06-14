@@ -63,7 +63,7 @@ public class UserInterfacePower extends Power implements Active {
     }
 
     public static PowerFactory<?> getFactory() {
-        return new PowerFactory<>(Apoli.identifier("UserInterface"),
+        return new PowerFactory<>(Megalib.identifier("user_interface"),
                 new SerializableData()
                         .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key())
                         .add("title", SerializableDataTypes.STRING, "User Interface"),
