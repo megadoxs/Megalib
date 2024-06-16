@@ -1,35 +1,16 @@
 package com.megadoxs.megalib.power;
 
 import com.megadoxs.megalib.Megalib;
-import com.megadoxs.megalib.content.UserInterface;
-import com.sun.jna.platform.unix.X11;
-import io.github.apace100.apoli.Apoli;
-import io.github.apace100.apoli.component.PowerHolderComponent;
+import com.megadoxs.megalib.screen.UserInterface.UserInterface;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
-import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.StackReference;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.text.*;
-import net.minecraft.util.Pair;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 @SuppressWarnings("unused")
 public class UserInterfacePower extends Power implements Active {
