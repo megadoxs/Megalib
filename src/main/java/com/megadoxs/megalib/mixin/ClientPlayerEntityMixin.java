@@ -6,8 +6,11 @@ import com.megadoxs.megalib.screen.UserInterface.UserInterface;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import org.spongepowered.asm.mixin.Mixin;
 
+@Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity implements UserInterfaceViewer {
     public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
         super(world, profile);

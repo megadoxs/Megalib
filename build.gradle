@@ -62,12 +62,10 @@ repositories {
 }
 
 loom {
-    splitEnvironmentSourceSets()
-
+	accessWidenerPath = file("src/main/resources/megalib.accesswidener")
 	mods {
-		"megalib" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
+		register("megalib") {
+			sourceSet(sourceSets.main)
 		}
 	}
 
