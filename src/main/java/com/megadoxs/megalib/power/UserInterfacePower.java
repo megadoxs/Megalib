@@ -1,35 +1,32 @@
 package com.megadoxs.megalib.power;
 
 import com.megadoxs.megalib.Megalib;
-import com.megadoxs.megalib.screen.UserInterface.UserInterface;
+import com.megadoxs.megalib.access.UserInterfaceViewer;
+import com.megadoxs.megalib.data.UserInterfaceData;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
-import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 
 @SuppressWarnings("unused")
 public class UserInterfacePower extends Power implements Active {
-
-    private final UserInterface screen;
-
-    private String screenTitle;
     private Key key;
 
-    public UserInterfacePower(PowerType<?> type, LivingEntity entity, String screenTitle) {
+    private final SerializableData.Instance data;
+
+    public UserInterfacePower(PowerType<?> type, LivingEntity entity, SerializableData.Instance data) {
         super(type, entity);
-        this.screen = new UserInterface(screenTitle, 200, 200);
+        this.data = data;
         this.setTicking(true);
     }
 
     @Override
     public void onUse() {
-        if (this.isActive() && entity instanceof PlayerEntity player) {
-
+        if (!entity.getWorld().isClient && entity instanceof UserInterfaceViewer viewer) {
+            viewer.megalib$showInterface(UserInterfaceData.fromData(data));
         }
     }
 
@@ -43,21 +40,20 @@ public class UserInterfacePower extends Power implements Active {
         this.key = key;
     }
 
+    // probably wrong
     public static PowerFactory<?> getFactory() {
-        return new PowerFactory<>(Megalib.identifier("user_interface"),
-                new SerializableData()
-                        .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key())
-                        .add("title", SerializableDataTypes.STRING, "User Interface"),
-                data ->
-                        (powerType, livingEntity) -> {
-                            UserInterfacePower UserInterfacePower = new UserInterfacePower(
-                                    powerType,
-                                    livingEntity,
-                                    data.getString("title")
+        return new PowerFactory<>(
+                Megalib.identifier("user_interface"),
+                UserInterfaceData.DATA
+                        .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
+                data -> (powerType, livingEntity) -> {
+                    UserInterfacePower userInterfacePower = new UserInterfacePower(
+                            powerType,
+                            livingEntity,
+                            data
                             );
-                            UserInterfacePower.setKey(data.get("key"));
-                            return UserInterfacePower;
-                        })
-                .allowCondition();
+                    userInterfacePower.setKey(data.get("key"));
+                    return userInterfacePower;
+                }).allowCondition();
     }
 }
