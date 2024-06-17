@@ -66,6 +66,19 @@ loom {
 	mods {
 		register("megalib") {
 			sourceSet(sourceSets.main)
+			sourceSet(sourceSets.test)
+		}
+	}
+	runs {
+		client {
+			client()
+			source(sourceSets.test)
+			setConfigName("Minecraft Client")
+		}
+		server {
+			server()
+			source(sourceSets.test)
+			setConfigName("Minecraft Server")
 		}
 	}
 
