@@ -63,11 +63,12 @@ repositories {
 
 loom {
 	mods {
-		register("megalib") {
+		"megalib" {
 			sourceSet(sourceSets.main)
 			sourceSet(sourceSets.test)
 		}
 	}
+
 	runs {
 		client {
 			client()
