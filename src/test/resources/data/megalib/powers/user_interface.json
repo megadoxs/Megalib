@@ -1,6 +1,35 @@
 {
   "type": "megalib:user_interface",
   "title": "test",
-  "width": 200,
-  "height": 200
+  "size": {
+    "unit": "percents",
+    "width": 100,
+    "height": 100
+  },
+  "element": {
+    "type": "megalib:and",
+    "elements": [
+      {
+        "type": "megalib:text",
+        "text": "Diffrent Text"
+      },
+      {
+        "type": "megalib:text",
+        "text": "Hello World for a second time"
+      },
+      {
+        "type": "megalib:button",
+        "text": "This is a Button that will for sure work",
+        "description": "This button will tell everybody how cool you are",
+        "size": {
+          "unit": "percents",
+          "width": 80
+        },
+        "action_on_press": {
+          "type": "origins:add_velocity",
+          "y": 2
+        }
+      }
+    ]
+  }
 }

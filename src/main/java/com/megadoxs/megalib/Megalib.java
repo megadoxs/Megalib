@@ -1,6 +1,8 @@
 package com.megadoxs.megalib;
 
+import com.megadoxs.megalib.registry.MegalibRegistries;
 import com.megadoxs.megalib.registry.factory.MegalibPowers;
+import com.megadoxs.megalib.screen_element.ScreenElements;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.util.Identifier;
@@ -13,13 +15,13 @@ public class Megalib implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 
 	public static final String MOD_ID = "megalib";
-    public static final Logger LOGGER = LoggerFactory.getLogger("Megalib.class");
 
 	@Override
 	public void onInitialize() {
+		ScreenElements.register();
+
 		MegalibPowers.register();
 
-		LOGGER.info("Megalib has initialized. Ready to power up your game!");
 	}
 	public static Identifier identifier(String path) {
 		return new Identifier(MOD_ID, path);
