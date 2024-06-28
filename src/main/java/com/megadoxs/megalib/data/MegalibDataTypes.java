@@ -5,12 +5,13 @@ import com.google.gson.JsonSyntaxException;
 import com.megadoxs.megalib.registry.MegalibRegistries;
 import com.megadoxs.megalib.screen_element.ScreenElementFactory;
 import com.megadoxs.megalib.screen_element.ScreenElements;
-import com.megadoxs.megalib.util.Screen.Size;
+import com.megadoxs.megalib.util.DataType.Axis;
+import com.megadoxs.megalib.util.DataType.Size;
+import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.calio.util.IdentifierAlias;
 import io.github.apace100.calio.ClassUtil;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
-import io.github.apace100.calio.data.SerializableDataTypes;
 import io.github.apace100.calio.util.DynamicIdentifier;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -20,12 +21,16 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 public class MegalibDataTypes {
+
+    public static final SerializableDataType<Size.Unit> UNIT = SerializableDataType.enumValue(Size.Unit.class);
+    public static final SerializableDataType<Axis> AXIS = SerializableDataType.enumValue(Axis.class);
+
     public static final SerializableDataType<Size> SIZE = SerializableDataType.compound(
             Size.class,
             new SerializableData()
-                    .add("unit", SerializableDataTypes.STRING, "percents")
-                    .add("width", SerializableDataTypes.INT, 0)
-                    .add("height", SerializableDataTypes.INT, 0),
+                    .add("unit", MegalibDataTypes.UNIT, Size.Unit.PERCENTS)
+                    .add("width", ApoliDataTypes.NON_NEGATIVE_INT, 0)
+                    .add("height", ApoliDataTypes.NON_NEGATIVE_INT, 0),
             (data) -> new Size(
                     data.get("unit"),
                     data.get("width"),

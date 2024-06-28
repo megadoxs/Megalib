@@ -1,6 +1,8 @@
 package com.megadoxs.megalib.screen_element;
 
 import com.google.gson.JsonObject;
+import com.megadoxs.megalib.screen.UserInterface.UserInterface;
+import com.megadoxs.megalib.util.Screen.Button;
 import com.megadoxs.megalib.util.Screen.ScreenElement;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.Factory;
@@ -12,6 +14,7 @@ import net.minecraft.util.Identifier;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class ScreenElementFactory implements Factory {
 
@@ -34,10 +37,10 @@ public class ScreenElementFactory implements Factory {
         }
 
         // this is such a cursed way to get the widgets
-        public ArrayList<Widget> getWidgets(int width, int height, PowerType<?> powerType) {
+        public ArrayList<Widget> getWidgets(UserInterface userInterface, int width, int height) {
             try {
-                Method method = clazz.getMethod("widgets", SerializableData.Instance.class, int.class, int.class, PowerType.class);
-                return (ArrayList<Widget>) method.invoke(null, dataInstance, width, height, powerType);
+                Method method = clazz.getMethod("widgets", SerializableData.Instance.class, UserInterface.class, int.class, int.class);
+                return (ArrayList<Widget>) method.invoke(null, dataInstance, userInterface, width, height);
             } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }

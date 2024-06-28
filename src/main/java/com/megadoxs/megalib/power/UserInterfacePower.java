@@ -33,9 +33,11 @@ public class UserInterfacePower extends Power implements Active {
         // !entity.getWorld().isClient && entity instanceof UserInterfaceViewer viewer
         // the condition I changed it to and works now...
         if (entity.getWorld().isClient && entity instanceof UserInterfaceViewer viewer) {
-            viewer.megalib$showInterface(UserInterfaceData.fromData(data), getType());
+            viewer.megalib$showInterface(UserInterfaceData.fromData(data));
         }
     }
+
+    //maybe make a method that takes an int for index, makes the interface, and trigger an action?
 
     @Override
     public Key getKey() {

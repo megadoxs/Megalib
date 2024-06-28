@@ -18,10 +18,10 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     }
 
     @Override
-    public void megalib$showInterface(UserInterfaceData InterfaceData, PowerType<?> powerType) {
+    public void megalib$showInterface(UserInterfaceData InterfaceData) {
         MinecraftClient client = MinecraftClient.getInstance();
         client.execute(() -> {
-            UserInterface userInterface = new UserInterface(InterfaceData, powerType);
+            UserInterface userInterface = new UserInterface(InterfaceData);
             client.setScreen(userInterface);
         });
     }

@@ -1,0 +1,44 @@
+{
+  "type": "megalib:user_interface",
+  "title": "test",
+  "alignment": "center",
+  "size": {
+    "unit": "percents",
+    "width": 80,
+    "height": 80
+  },
+  "element": {
+    "type": "megalib:directional_layout",
+    "axis": "vertical",
+    "elements": [
+      {
+        "type": "megalib:button",
+        "text": "This is a Button that will for sure work",
+        "description": "This button will tell everybody how cool you are",
+        "alignment": "center",
+        "action_on_press": {
+          "type": "origins:execute_command",
+          "command": "tellraw @s \"Mega finally made it work\""
+        },
+        "press_condition": {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:command",
+              "command": "/execute if entity @s[gamemode=creative]",
+              "comparison": "==",
+              "compare_to": 1
+            },
+            {
+              "type": "origins:exposed_to_sky"
+            }
+          ]
+        }
+      },
+      {
+        "type": "megalib:text",
+        "text": "Just a new test"
+      }
+    ]
+  }
+}

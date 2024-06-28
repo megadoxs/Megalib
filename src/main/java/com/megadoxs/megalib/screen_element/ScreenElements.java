@@ -5,6 +5,7 @@ import com.megadoxs.megalib.registry.MegalibRegistries;
 import com.megadoxs.megalib.screen_element.element.AndScreenElement;
 import com.megadoxs.megalib.screen_element.element.ButtonScreenElement;
 import com.megadoxs.megalib.screen_element.element.TextScreenElement;
+import com.megadoxs.megalib.screen_element.layout.DirectionalLayout;
 import io.github.apace100.calio.util.IdentifierAlias;
 import net.minecraft.entity.Entity;
 import net.minecraft.registry.Registry;
@@ -15,6 +16,7 @@ public class ScreenElements {
 
     public static void register(){
         register(AndScreenElement.getFactory(MegalibDataTypes.SCREEN_ELEMENTS));
+        register(DirectionalLayout.getFactory());
 
         register(TextScreenElement.getFactory());
         register(ButtonScreenElement.getFactory());

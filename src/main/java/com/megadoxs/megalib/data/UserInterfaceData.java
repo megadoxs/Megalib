@@ -1,7 +1,7 @@
 package com.megadoxs.megalib.data;
 
 import com.megadoxs.megalib.screen_element.ScreenElementFactory;
-import com.megadoxs.megalib.util.Screen.Size;
+import com.megadoxs.megalib.util.DataType.Size;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
@@ -10,7 +10,7 @@ public record UserInterfaceData(String title, Size size, String location, Screen
 
     public static final SerializableData DATA = new SerializableData()
             .add("title", SerializableDataTypes.STRING, "UserInterface.Title")
-            .add("size", MegalibDataTypes.SIZE, new Size("percents", 100, 100))
+            .add("size", MegalibDataTypes.SIZE, new Size(Size.Unit.PERCENTS, 100, 100))
             .add("location", SerializableDataTypes.STRING, "centered")
             .add("element", MegalibDataTypes.SCREEN_ELEMENT, null);
 

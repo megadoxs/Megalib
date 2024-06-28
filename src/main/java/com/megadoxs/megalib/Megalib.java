@@ -1,5 +1,6 @@
 package com.megadoxs.megalib;
 
+import com.megadoxs.megalib.networking.task.ModPacketsC2S;
 import com.megadoxs.megalib.registry.MegalibRegistries;
 import com.megadoxs.megalib.registry.factory.MegalibPowers;
 import com.megadoxs.megalib.screen_element.ScreenElements;
@@ -18,6 +19,8 @@ public class Megalib implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModPacketsC2S.register();
+
 		ScreenElements.register();
 
 		MegalibPowers.register();
