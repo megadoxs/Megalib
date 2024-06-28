@@ -45,7 +45,7 @@ public class UserInterface extends Screen {
         super.init();
         index = -1; // so that when you ask for an index you get 0 as the first value
 
-        if (size.unit().equals("percents")){
+        if (size.unit().equals(Size.Unit.PERCENTS)){
             assert client != null;
             width = client.getWindow().getScaledWidth() * size.width()/100;
             height = client.getWindow().getScaledHeight() * size.height()/100;
