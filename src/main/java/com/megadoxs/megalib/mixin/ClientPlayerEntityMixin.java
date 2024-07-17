@@ -4,7 +4,6 @@ import com.megadoxs.megalib.access.UserInterfaceViewer;
 import com.megadoxs.megalib.data.UserInterfaceData;
 import com.megadoxs.megalib.screen.UserInterface.UserInterface;
 import com.mojang.authlib.GameProfile;
-import io.github.apace100.apoli.power.PowerType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;

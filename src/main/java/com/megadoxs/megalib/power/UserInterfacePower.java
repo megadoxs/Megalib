@@ -3,17 +3,13 @@ package com.megadoxs.megalib.power;
 import com.megadoxs.megalib.Megalib;
 import com.megadoxs.megalib.access.UserInterfaceViewer;
 import com.megadoxs.megalib.data.UserInterfaceData;
-import com.megadoxs.megalib.screen_element.ScreenElementFactory;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.calio.data.SerializableData;
-import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.entity.LivingEntity;
-
-import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class UserInterfacePower extends Power implements Active {
@@ -36,8 +32,6 @@ public class UserInterfacePower extends Power implements Active {
             viewer.megalib$showInterface(UserInterfaceData.fromData(data));
         }
     }
-
-    //maybe make a method that takes an int for index, makes the interface, and trigger an action?
 
     @Override
     public Key getKey() {

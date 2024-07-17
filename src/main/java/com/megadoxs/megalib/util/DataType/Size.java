@@ -1,8 +1,5 @@
 package com.megadoxs.megalib.util.DataType;
 
-import io.github.apace100.apoli.Apoli;
-import net.minecraft.client.MinecraftClient;
-
 //might make it a class again since I have some case were it doesn't need to be defined, or at least all values have to
 public record Size(Unit unit, int width, int height) {
 

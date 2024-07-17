@@ -1,7 +1,7 @@
 {
   "type": "megalib:user_interface",
-  "title": "test",
-  "alignment": "center",
+  "title": "my great title",
+  "alignment": "top",
   "size": {
     "unit": "percents",
     "width": 80,
@@ -10,6 +10,11 @@
   "element": {
     "type": "megalib:directional_layout",
     "axis": "vertical",
+    "alignment": "top_left",
+    "size": {
+      "unit": "percents",
+      "height": 20
+    },
     "elements": [
       {
         "type": "megalib:button",
@@ -18,7 +23,35 @@
         "alignment": "center",
         "action_on_press": {
           "type": "origins:execute_command",
-          "command": "tellraw @s \"Mega finally made it work\""
+          "command": "/scoreboard players add @s test 1"
+        },
+        "press_condition": {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:command",
+              "command": "/execute if entity @s[gamemode=creative]",
+              "comparison": "==",
+              "compare_to": 1
+            },
+            {
+              "type": "origins:exposed_to_sky"
+            }
+          ]
+        }
+      },
+      {
+        "type": "megalib:boolean_button",
+        "text": "noob",
+        "description": "sets if the player is a noob or not",
+        "alignment": "center",
+        "action_on_true": {
+          "type": "origins:execute_command",
+          "command": "/scoreboard players set @s test 1"
+        },
+        "action_on_false": {
+          "type": "origins:execute_command",
+          "command": "/scoreboard players set @s test 0"
         },
         "press_condition": {
           "type": "origins:and",
@@ -37,7 +70,60 @@
       },
       {
         "type": "megalib:text",
-        "text": "Just a new test"
+        "text": {
+          "text": "This is an example text string with a fancy color!",
+          "color": "yellow"
+        }
+      },
+      {
+        "type": "megalib:texture",
+        "sprite_location": "origins:textures/item/orb_of_origin.png"
+      },
+      {
+        "type": "megalib:display",
+        "command": "/scoreboard players get @s test",
+        "border": {
+          "border_top": {
+            "should_render": true,
+            "width": 1,
+            "red": 255,
+            "green": 255,
+            "blue" : 255
+          },
+          "border_bottom": {
+            "should_render": true,
+            "width": 1,
+            "red": 255,
+            "green": 255,
+            "blue" : 255
+          },
+          "border_left": {
+            "should_render": true,
+            "width": 1,
+            "red": 255,
+            "green": 255,
+            "blue" : 255
+          },
+          "border_right": {
+            "should_render": true,
+            "width": 1,
+            "red": 255,
+            "green": 255,
+            "blue" : 255
+          }
+        }
+      },
+      {
+        "type": "megalib:checkbox",
+        "description": "A checkbox that does nothing lol",
+        "action_on_check": {
+          "type": "origins:execute_command",
+          "command": "/scoreboard players set @s test 1"
+        },
+        "action_on_uncheck": {
+          "type": "origins:execute_command",
+          "command": "/scoreboard players set @s test 0"
+        }
       }
     ]
   }

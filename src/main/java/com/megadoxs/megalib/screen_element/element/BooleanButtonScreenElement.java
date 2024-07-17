@@ -3,10 +3,10 @@ package com.megadoxs.megalib.screen_element.element;
 import com.megadoxs.megalib.Megalib;
 import com.megadoxs.megalib.MegalibClient;
 import com.megadoxs.megalib.data.MegalibDataTypes;
-import com.megadoxs.megalib.screen.UserInterface.UserInterface;
 import com.megadoxs.megalib.screen_element.ScreenElementFactory;
 import com.megadoxs.megalib.util.DataType.Size;
-import com.megadoxs.megalib.util.Screen.MegalibButtonWidget;
+import com.megadoxs.megalib.util.Screen.MegalibBooleanButtonWidget;
+import com.megadoxs.megalib.util.Screen.MegalibCheckboxWidget;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
@@ -19,25 +19,38 @@ import net.minecraft.entity.Entity;
 
 import java.util.ArrayList;
 
-public class ButtonScreenElement{
+// MegalibButtonWidget classes need a rework like urgently *****
+public class BooleanButtonScreenElement {
     public static void widgets(SerializableData.Instance data, ArrayList<Widget> widgets, int x, int y, int width, int height) {
         int index = widgets.size();
 
         // Sets the action that will be executed when the user presses the button
-        ActionFactory<Entity>.Instance action = data.get("action_on_press");
-        MegalibButtonWidget megalibButtonWidget = MegalibButtonWidget.betterBuilder(data.get("text"), b -> { // Will probably completely redo the buttonWidgetClass
+        ActionFactory<Entity>.Instance trueAction = data.get("action_on_true");
+        ActionFactory<Entity>.Instance falseAction = data.get("action_on_false");
+
+        MegalibBooleanButtonWidget megalibBooleanButtonWidget = MegalibBooleanButtonWidget.evenBetterBuilder(data.get("text"), bb -> {
+            ((MegalibBooleanButtonWidget) bb).updateValue();
+            if(((MegalibBooleanButtonWidget) bb).getValue())
+                trueAction.accept(MinecraftClient.getInstance().player);
+            else
+                falseAction.accept(MinecraftClient.getInstance().player);
             MegalibClient.performWidgetActions(index);
-            action.accept(MinecraftClient.getInstance().player);
         }).build();
-        megalibButtonWidget.setAction(b -> action);
+
+        megalibBooleanButtonWidget.setAction(bb -> {
+            if (((MegalibBooleanButtonWidget) bb).getValue())
+                return trueAction;
+            else
+                return falseAction;
+        });
 
         // add the widget to the list to be loaded on the interface (before checking for the condition)
-        widgets.add(megalibButtonWidget);
+        widgets.add(megalibBooleanButtonWidget);
 
         //probably only checks the condition when the screen is open, need confirmation/fix
         if(data.get("press_condition") != null){
             ConditionFactory<Entity>.Instance condition = data.get("press_condition");
-            megalibButtonWidget.setCondition(condition);
+            megalibBooleanButtonWidget.setCondition(condition);
             ButtonScreenElement.IsButtonConditionFulfilled(index);
             //maybe make it wait for a response?
         }
@@ -47,26 +60,26 @@ public class ButtonScreenElement{
         // lets the user chose the width and height of the button
         Size size = data.get("size");
         if (size.width() != 0)
-            megalibButtonWidget.setWidth(size.getWidth(width));
+            megalibBooleanButtonWidget.setWidth(size.getWidth(width));
         else
-            megalibButtonWidget.setWidth(MinecraftClient.getInstance().textRenderer.getWidth(megalibButtonWidget.getMessage()) + 10);
+            megalibBooleanButtonWidget.setWidth(MinecraftClient.getInstance().textRenderer.getWidth(megalibBooleanButtonWidget.getMessage()) + 10);
         if (size.height() != 0)
-            megalibButtonWidget.setHeight(size.getHeight(height));
+            megalibBooleanButtonWidget.setHeight(size.getHeight(height));
 
         // going to have an alignment field
         //button.setX();
         //button.setY();
 
         // only for test/demo purposes
-        megalibButtonWidget.setX(MinecraftClient.getInstance().getWindow().getScaledWidth()/2- megalibButtonWidget.getWidth()/2);
-        megalibButtonWidget.setY(MinecraftClient.getInstance().getWindow().getScaledHeight()/2- megalibButtonWidget.getHeight()/2);
+        megalibBooleanButtonWidget.setX(MinecraftClient.getInstance().getWindow().getScaledWidth()/2- megalibBooleanButtonWidget.getWidth()/2);
+        megalibBooleanButtonWidget.setY(MinecraftClient.getInstance().getWindow().getScaledHeight()/2- megalibBooleanButtonWidget.getHeight()/2);
 
         // will maybe add something to play with the alpha value (transparency)
         //button.setAlpha(0.1F);
 
         // set the text that will be showed when the user hovers the button, if defined
         if (data.get("description") != null)
-            megalibButtonWidget.setTooltip(Tooltip.of(data.get("description")));
+            megalibBooleanButtonWidget.setTooltip(Tooltip.of(data.get("description")));
     }
 
     public static void IsButtonConditionFulfilled(int index){
@@ -76,15 +89,16 @@ public class ButtonScreenElement{
 
     public static ScreenElementFactory getFactory() {
         return new ScreenElementFactory(
-                Megalib.identifier("button"),
+                Megalib.identifier("boolean_button"),
                 new SerializableData()
                         .add("text", SerializableDataTypes.TEXT)
                         .add("size", MegalibDataTypes.SIZE, new Size(Size.Unit.PERCENTS, 0, 0))
                         .add("description", SerializableDataTypes.TEXT, null)
                         .add("alignment", MegalibDataTypes.ALIGNMENT, null) // might give it a default value
-                        .add("action_on_press", ApoliDataTypes.ENTITY_ACTION)
+                        .add("action_on_true", ApoliDataTypes.ENTITY_ACTION)
+                        .add("action_on_false", ApoliDataTypes.ENTITY_ACTION)
                         .add("press_condition", ApoliDataTypes.ENTITY_CONDITION, null),
-                ButtonScreenElement::widgets
+                BooleanButtonScreenElement::widgets
         );
     }
 }

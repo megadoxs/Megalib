@@ -1,7 +1,8 @@
 package com.megadoxs.megalib;
 
-import com.megadoxs.megalib.networking.packet.c2s.PerformButtonActionsC2SPacket;
 import com.megadoxs.megalib.networking.packet.c2s.IsButtonConditionFulfilledC2SPacket;
+import com.megadoxs.megalib.networking.packet.c2s.PerformWidgetActionC2SPacket;
+import com.megadoxs.megalib.networking.packet.c2s.SetDisplayValueC2SPacket;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,11 +15,17 @@ public class MegalibClient implements ClientModInitializer {
 	}
 
 	// does will only work for buttons,
-	public static void performButtonActions(int index) {
-		ClientPlayNetworking.send(new PerformButtonActionsC2SPacket(index));
+	public static void performWidgetActions(int index) {
+		ClientPlayNetworking.send(new PerformWidgetActionC2SPacket(index));
 	}
 
 	public static void isButtonConditionFulfilled(int index) {
+		// will make it wait for a response
 		ClientPlayNetworking.send(new IsButtonConditionFulfilledC2SPacket(index));
+	}
+
+	public static void setDisplayValue(int index) {
+		// will make it wait for a response
+		ClientPlayNetworking.send(new SetDisplayValueC2SPacket(index));
 	}
 }

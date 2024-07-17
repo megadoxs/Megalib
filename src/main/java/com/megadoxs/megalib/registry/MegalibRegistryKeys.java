@@ -2,7 +2,6 @@ package com.megadoxs.megalib.registry;
 
 import com.megadoxs.megalib.Megalib;
 import com.megadoxs.megalib.screen_element.ScreenElementFactory;
-import net.minecraft.entity.Entity;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 

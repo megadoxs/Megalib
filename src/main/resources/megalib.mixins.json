@@ -5,10 +5,11 @@
   "plugin": "com.megadoxs.megalib.MegalibMixinPlugin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "DrawContextMixin",
     "ServerPlayerEntityMixin"
   ],
   "client": [
-    "clientPlayerEntityMixin"
+    "ClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

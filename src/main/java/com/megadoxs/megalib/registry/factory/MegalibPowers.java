@@ -1,6 +1,6 @@
 package com.megadoxs.megalib.registry.factory;
 
-import com.megadoxs.megalib.power.*;
+import com.megadoxs.megalib.power.UserInterfacePower;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
 import net.minecraft.registry.Registry;

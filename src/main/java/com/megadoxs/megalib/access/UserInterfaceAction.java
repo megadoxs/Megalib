@@ -5,4 +5,5 @@ import net.minecraft.entity.Entity;
 
 public interface UserInterfaceAction {
     ActionFactory<Entity>.Instance megalib$getWidgetAction(int index);
+    void megalib$updateUserInterface();
 }

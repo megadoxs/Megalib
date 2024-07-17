@@ -1,13 +1,9 @@
 package com.megadoxs.megalib.screen_element;
 
-import com.megadoxs.megalib.data.MegalibDataTypes;
 import com.megadoxs.megalib.registry.MegalibRegistries;
-import com.megadoxs.megalib.screen_element.element.AndScreenElement;
-import com.megadoxs.megalib.screen_element.element.ButtonScreenElement;
-import com.megadoxs.megalib.screen_element.element.TextScreenElement;
+import com.megadoxs.megalib.screen_element.element.*;
 import com.megadoxs.megalib.screen_element.layout.DirectionalLayout;
 import io.github.apace100.calio.util.IdentifierAlias;
-import net.minecraft.entity.Entity;
 import net.minecraft.registry.Registry;
 
 public class ScreenElements {
@@ -15,11 +11,14 @@ public class ScreenElements {
     public static final IdentifierAlias ALIASES = new IdentifierAlias();
 
     public static void register(){
-        register(AndScreenElement.getFactory(MegalibDataTypes.SCREEN_ELEMENTS));
         register(DirectionalLayout.getFactory());
 
         register(TextScreenElement.getFactory());
         register(ButtonScreenElement.getFactory());
+        register(BooleanButtonScreenElement.getFactory());
+        register(TextureScreenElement.getFactory());
+        register(DisplayScreenElement.getFactory());
+        register(CheckboxScreenElement.getFactory());
     }
 
     private static void register(ScreenElementFactory screenElementFactory) {
