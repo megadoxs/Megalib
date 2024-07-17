@@ -12,8 +12,8 @@ public class MegalibBooleanButtonWidget extends MegalibButtonWidget{
     private boolean value;
     private final Text message;
 
-    protected MegalibBooleanButtonWidget(int x, int y, int width, int height, Text message, PressAction onPress, NarrationSupplier narrationSupplier) {
-        super(x, y, width, height, Text.of(message.getString() + ": false"), onPress, narrationSupplier);
+    protected MegalibBooleanButtonWidget(int x, int y, int width, int height, Text message, PressAction onPress) {
+        super(x, y, width, height, Text.of(message.getString() + ": false"), onPress);
         value = false;
         this.message = message;
     }
@@ -43,10 +43,8 @@ public class MegalibBooleanButtonWidget extends MegalibButtonWidget{
         private int y;
         private int width = 150;
         private int height = 20;
-        private NarrationSupplier narrationSupplier;
 
         public Builder(Text message, PressAction onPress) {
-            this.narrationSupplier = ButtonWidget.DEFAULT_NARRATION_SUPPLIER;
             this.message = message;
             this.onPress = onPress;
         }
@@ -77,13 +75,8 @@ public class MegalibBooleanButtonWidget extends MegalibButtonWidget{
             return this;
         }
 
-        public MegalibBooleanButtonWidget.Builder narrationSupplier(NarrationSupplier narrationSupplier) {
-            this.narrationSupplier = narrationSupplier;
-            return this;
-        }
-
         public MegalibBooleanButtonWidget build() {
-            MegalibBooleanButtonWidget megalibBooleanButtonWidgetWidget = new MegalibBooleanButtonWidget(this.x, this.y, this.width, this.height, this.message, this.onPress, this.narrationSupplier);
+            MegalibBooleanButtonWidget megalibBooleanButtonWidgetWidget = new MegalibBooleanButtonWidget(this.x, this.y, this.width, this.height, this.message, this.onPress);
             megalibBooleanButtonWidgetWidget.setTooltip(this.tooltip);
             return megalibBooleanButtonWidgetWidget;
         }

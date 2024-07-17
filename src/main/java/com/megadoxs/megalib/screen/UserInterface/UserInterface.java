@@ -36,8 +36,6 @@ public class UserInterface extends Screen {
     private final Size size;
 
     private final ScreenElementFactory.Instance screenElements;
-
-    // can't I just make a function for widget to add themselves here so when creating them? could make display and button set their value when creating.
     private final ArrayList<Widget> widgets = new ArrayList<>();
     //private MegalibWidgetVisibility widget; // has planned used in future
 
